@@ -190,6 +190,7 @@ export default function PageViewer({ page, isLoading, onSave }) {
               </div>
               <textarea
                 className="edit-textarea"
+                aria-label={`Edit markdown for ${page.title}`}
                 value={editMd}
                 onChange={(e) => setEditMd(e.target.value)}
               />
