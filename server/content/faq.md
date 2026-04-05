@@ -1,3 +1,8 @@
+---
+category: Support
+tags: faq, pricing, support
+---
+
 # Frequently Asked Questions
 
 ## How do I get started with TechVision?

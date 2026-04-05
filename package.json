@@ -2,6 +2,7 @@
   "name": "cms",
   "private": true,
   "version": "1.0.0",
+  "type": "module",
   "scripts": {
     "dev": "concurrently \"npm run server\" \"npm run client\"",
     "server": "cd server && node index.js",

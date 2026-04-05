@@ -1,86 +1,33 @@
-# AGENTS.md
+Read the AGENTS.md file in this project. Build the complete CMS application as described:
+Backend (server/index.js): Create an Express API with two endpoints — GET /api/pages returns a list of all markdown files (slug + title extracted from first heading), and GET /api/pages/:slug returns the content of one file converted from markdown to HTML using the "marked" package.
+Frontend (client/src/): Create a React app with a sidebar showing all pages, a main content area that renders the selected page's HTML, and a search bar that filters pages in real-time.
+Wire them together: the frontend fetches data from the backend API. Clicking a page in the sidebar loads its content. The first page loads by default.
+The server/content/ folder already has 7 markdown files — use them as the data source.
 
-## Important: Working with a Non-Technical User
+Before you start, ask me which UI theme I want (A, B, or C — see AGENTS.md). Then build everything in one go. Make sure the app runs with npm run dev from the root folder.
 
-The user is a non-technical person with no programming experience.
-- Always explain what you are doing in simple, plain language
-- Never ask the user to manually edit code or configuration files
-- If something breaks, fix it yourself — do not ask the user to debug
-- After each change, tell the user how to see the result (e.g., "open your browser")
-- Prefer simple, working solutions over clever or complex ones
-- When asking questions in planning mode, use non-technical language
+I want to build a web portal that shows documents from a folder — with a sidebar menu, page viewer, and search. It has a backend that reads files and a frontend that displays them. Read the AGENTS.md for details. Before writing any code, ask me questions about what I want — use simple, non-technical language. Then propose a plan and build it step by step.
 
-## Project: Content Management System (CMS)
+Redesign the UI of this CMS portal to match the visual style of epam.com — use their color palette, typography style, and overall look and feel. Browse https://epam.com for reference. Keep all existing functionality intact.
 
-### Goal
+Breadcrumbs and Metadata
+Add breadcrumb navigation to the content area: [DESCRIBE BREADCRUMBS — e.g., "Home > Page Title" at the top of each page]. Also display page metadata: [LIST METADATA — e.g., file creation date, word count, estimated reading time]. Style the metadata [DESCRIBE STYLE — e.g., as a subtle gray bar below the breadcrumbs].
 
-Build a web application that reads markdown files from a local folder and displays them as a browsable portal with sidebar navigation, search, and clean formatting. This is a full-stack project with a Node.js backend and React frontend.
+Syntax Highlighting
+Add syntax highlighting for code blocks in the markdown content. Use [LIBRARY — e.g., highlight.js or Prism.js] to highlight code in [LANGUAGES — e.g., JavaScript, Python, HTML, CSS]. Style the code blocks with [DESCRIBE STYLE — e.g., a dark background, rounded corners, and a "Copy" button in the top-right corner].
 
-### Tech Stack
+Table of Contents
+Add an auto-generated Table of Contents for each page. The ToC should [DESCRIBE BEHAVIOR — e.g., appear as a sidebar on the right side of the content area, show all H2 and H3 headings as clickable links]. When clicking a ToC item, [DESCRIBE SCROLL — e.g., smoothly scroll to that heading]. Highlight [DESCRIBE ACTIVE STATE — e.g., the currently visible heading in the ToC as the user scrolls].
 
-- **Backend:** Express.js, marked (markdown → HTML)
-- **Frontend:** React (Vite is already configured)
-- **Content:** Pre-written .md files in `server/content/`
-- Both parts run simultaneously using `concurrently`
+CRUD editing — the ability to edit page content directly in the browser (Edit button → text area with markdown → Save writes back to the server)
+Categories and tags — each page can have a category and tags (at the top of the .md file). The sidebar groups pages by category; tags are clickable and work as filters
+Full-text search — enhanced search: searches not only by titles but also by page content. Shows snippets with highlighted matching words
 
-### UI Theme Options
 
-Before starting, the mentee picks ONE theme. Ask which they prefer:
+## themes
 
-- **Theme A — Documentation Portal:** Clean white layout, left sidebar with blue (#2563eb) active states, technical documentation feel, monospace code blocks
-- **Theme B — Internal Wiki (EPAM):** EPAM blue (#39f) header, light gray sidebar, corporate internal portal feel, breadcrumb navigation
-- **Theme C — Knowledge Base:** Dark sidebar (#1e1e2e), light content area, modern knowledge base feel, search prominently placed in header
+	Theme	Description	Style
+1	A — Documentation Portal	Clean white, blue accents	Technical documentation
+2	B — Internal Wiki (EPAM)	EPAM blue header, gray sidebar	Corporate internal portal
+3	C — Knowledge Base	Dark sidebar, light content area	Modern knowledge base
 
-### Architecture
-
-```
-cms/
-├── server/
-│   ├── index.js         — Express API server (port 3001)
-│   ├── package.json
-│   └── content/         — Markdown files (pre-written)
-│       ├── about.md
-│       ├── services.md
-│       ├── team.md
-│       ├── faq.md
-│       ├── getting-started.md
-│       ├── contact.md
-│       └── news.md
-└── client/
-    ├── src/
-    │   ├── App.jsx      — Main layout (sidebar + content area)
-    │   ├── components/
-    │   │   ├── Sidebar.jsx    — Page list with navigation
-    │   │   ├── Content.jsx    — Rendered markdown content
-    │   │   └── SearchBar.jsx  — Text search input
-    │   ├── App.css
-    │   └── main.jsx
-    ├── package.json
-    ├── vite.config.js   — Proxy API requests to backend
-    └── index.html
-```
-
-### API Endpoints (server)
-
-1. `GET /api/pages` — Returns list of all pages: `[{ slug: "about", title: "About Us" }, ...]`
-   - Title is extracted from the first `# Heading` in each .md file
-   - Slug is the filename without extension
-2. `GET /api/pages/:slug` — Returns single page content as HTML (converted from markdown using `marked`)
-
-### Frontend Behavior
-
-- On load, fetch page list from `/api/pages` and display in sidebar
-- Click a page in sidebar → fetch `/api/pages/:slug` and render HTML in content area
-- Search input filters the page list in real-time (by title and content)
-- First page is loaded by default
-
-### Content Files
-
-The `server/content/` folder comes with 7 pre-written markdown files about a fictional company. These serve as sample data — the CMS should work with any .md files placed in this folder.
-
-### Constraints
-
-- `npm run dev` at the root starts both server and client
-- Backend runs on port 3001, frontend on port 5173 (with Vite proxy)
-- Adding a new .md file to `server/content/` should make it appear after page refresh
-- Keep code simple — no database, no authentication

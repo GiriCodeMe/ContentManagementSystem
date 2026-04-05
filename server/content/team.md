@@ -1,3 +1,8 @@
+---
+category: Company
+tags: team, culture, leadership
+---
+
 # Our Team
 
 ## Leadership
