@@ -1,3 +1,8 @@
+---
+category: News
+tags: updates, awards, events
+---
+
 # News & Updates
 
 ## February 2026 — New AI Practice Launched

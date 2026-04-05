@@ -1,3 +1,8 @@
+---
+category: Guides
+tags: onboarding, process, setup
+---
+
 # Getting Started
 
 Welcome! This guide will help you understand how to work with TechVision and what to expect from our engagement process.

@@ -1,3 +1,8 @@
+---
+category: Company
+tags: overview, mission, team
+---
+
 # About Us
 
 Welcome to **TechVision Solutions** — a technology consulting company helping businesses transform their digital operations.
